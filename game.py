@@ -50,14 +50,18 @@ def create_circle():
     '''[4]'''
     objects_list.append(circle_obj)
 
+create_circle()
+
 def move_obj():
     return
 
 def upd_obj():
     return
 
-def draw_objects(objl):
-    return
+def draw_objects():
+    for obj in objects_list:
+        if obj[0] == 'circle':
+            circle(screen, obj[1], obj[2], obj[3])
 
 pygame.display.update()
 clock = pygame.time.Clock()
@@ -66,13 +70,13 @@ finished = False
 while not finished:
     '''main program work'''
     clock.tick(FPS)
-    upd_obj(objects_list)
+    #upd_obj(objects_list)
     for event in pygame.event.get():
         '''proc input'''
         if event.type == pygame.QUIT:
             finished = True
-
-    draw_objects(objects_list)
+    move_obj()
+    draw_objects()
     pygame.display.update()
     screen.fill(BLACK)
 
