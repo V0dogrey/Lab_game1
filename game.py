@@ -6,6 +6,7 @@ pygame.init()
 FPS = 2
 screen = pygame.display.set_mode((1200, 800))
 '''set screen resolution'''
+play_score = 0
 
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
@@ -19,6 +20,19 @@ COLORS = [RED, BLUE, YELLOW, GREEN, MAGENTA, CYAN]
 
 objects_list = []
 
+circle_obj = []
+
+def create_obj():
+    return
+
+def move_obj():
+    return
+
+def upd_obj():
+    if len(objects_list) < 1:
+        create_obj()
+    return
+
 def draw_objects(objl):
     return
 
@@ -29,6 +43,7 @@ finished = False
 while not finished:
     '''main program work'''
     clock.tick(FPS)
+    upd_obj(objects_list)
     for event in pygame.event.get():
         '''proc input'''
         if event.type == pygame.QUIT:
