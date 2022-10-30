@@ -30,11 +30,11 @@ def create_circle():
     [4]: movespeed on coords (x, y)
     '''
     circle_obj = []
-    circle_move_speed = 10
+    circle_move_speed = 3
 
     circle_obj.append('circle')
     '''[0]'''
-    color = COLORS[randint(0, len(COLORS))]
+    color = COLORS[randint(0, len(COLORS)) - 1]
     circle_obj.append((color))
     '''[1]'''
     x = randint(100, 700)
@@ -53,7 +53,10 @@ def create_circle():
 create_circle()
 
 def move_obj():
-    return
+    for obj in objects_list:
+        x = obj[2][0] + obj[4][0]
+        y = obj[2][1] + obj[4][1]
+        obj[2] = (x, y)
 
 def upd_obj():
     return
