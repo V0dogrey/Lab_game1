@@ -1,6 +1,7 @@
 import pygame
+import math
 from pygame.draw import *
-import random
+from random import *
 pygame.init()
 
 FPS = 2
@@ -20,17 +21,39 @@ COLORS = [RED, BLUE, YELLOW, GREEN, MAGENTA, CYAN]
 
 objects_list = []
 
-circle_obj = []
+def create_circle():
+    '''Add to objects list circle object with:
+    [0]: type = 'circle'
+    [1]: Color
+    [2]: start coordinates (x, y)
+    [3]: radius if circle
+    [4]: movespeed on coords (x, y)
+    '''
+    circle_obj = []
+    circle_move_speed = 10
 
-def create_obj():
-    return
+    circle_obj.append('circle')
+    '''[0]'''
+    color = COLORS[randint(0, len(COLORS))]
+    circle_obj.append((color))
+    '''[1]'''
+    x = randint(100, 700)
+    y = randint(100, 500)
+    circle_obj.append((x, y))
+    '''[2]'''
+    r = randint(30, 50)
+    circle_obj.append(r)
+    '''[3]'''
+    x_speed = circle_move_speed * randint(-5, 5)
+    y_speed = circle_move_speed * randint(-5, 5)
+    circle_obj.append((x_speed, y_speed))
+    '''[4]'''
+    objects_list.append(circle_obj)
 
 def move_obj():
     return
 
 def upd_obj():
-    if len(objects_list) < 1:
-        create_obj()
     return
 
 def draw_objects(objl):
