@@ -58,9 +58,6 @@ def move_obj():
         y = obj[2][1] + obj[4][1]
         obj[2] = (x, y)
 
-def upd_obj():
-    return
-
 def draw_objects():
     for obj in objects_list:
         if obj[0] == 'circle':
@@ -73,14 +70,27 @@ finished = False
 while not finished:
     '''main program work'''
     clock.tick(FPS)
-    #upd_obj(objects_list)
+    move_obj()
     for event in pygame.event.get():
-        '''proc input'''
+        '''procesing input'''
         if event.type == pygame.QUIT:
             finished = True
-    move_obj()
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            for obj in objects_list:
+                gotcha = False
+                dis_to_obj_x = obj[2][0] - event.pos[0]
+                dis_to_obj_y = obj[2][1] - event.pos[1]
+                dis_to_obj = dis_to_obj_x ** 2 + dis_to_obj_y ** 2
+                if dis_to_obj < obj[3] ** 2:
+                    create_circle()
+                    objects_list.remove(obj)
+                    play_score += 100
+
+
     draw_objects()
     pygame.display.update()
     screen.fill(BLACK)
 
 pygame.quit()
+
+print(play_score)
