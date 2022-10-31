@@ -4,8 +4,9 @@ from pygame.draw import *
 from random import *
 pygame.init()
 
-FPS = 2
-screen = pygame.display.set_mode((1200, 800))
+FPS = 30
+screen_resolution = (1200, 800)
+screen = pygame.display.set_mode(screen_resolution)
 '''set screen resolution'''
 play_score = 0
 
@@ -19,12 +20,12 @@ BLACK = (0, 0, 0)
 COLORS = [RED, BLUE, YELLOW, GREEN, MAGENTA, CYAN]
 '''make colors list'''
 
+circle_move_speed = 30
 objects_list = []
 
 def set_speed(obj_speed):
     angle = math.pi * 2 * random()
     speed = (math.sin(angle) * obj_speed, math.cos(angle) * obj_speed)
-    print(speed)
     return speed
 
 def create_circle():
@@ -36,7 +37,7 @@ def create_circle():
     [4]: movespeed on coords (x, y)
     '''
     circle_obj = []
-    circle_move_speed = 10
+
 
     circle_obj.append('circle')
     '''[0]'''
@@ -58,6 +59,29 @@ create_circle()
 
 def move_obj():
     for obj in objects_list:
+
+        if obj[2][0] - obj[3] < 0:
+            get_speed = set_speed(circle_move_speed)
+            if get_speed[0] < 0:
+                get_speed = get_speed[0] * -1, get_speed[1]
+            obj[4] = get_speed
+        if obj[2][0] + obj[3] > screen_resolution[0]:
+            get_speed = set_speed(circle_move_speed)
+            if get_speed[0] > 0:
+                get_speed = get_speed[0] * -1, get_speed[1]
+            obj[4] = get_speed
+        if obj[2][1] - obj[3] < 0:
+            get_speed = set_speed(circle_move_speed)
+            if get_speed[1] < 0:
+                get_speed = get_speed[0], get_speed[1] * -1
+            print(get_speed)
+            obj[4] = get_speed
+        if obj[2][1] + obj[3] > screen_resolution[1]:
+            get_speed = set_speed(circle_move_speed)
+            if get_speed[1] > 0:
+                get_speed = get_speed[0], get_speed[1] * -1
+            obj[4] = get_speed
+
         x = obj[2][0] + obj[4][0]
         y = obj[2][1] + obj[4][1]
         obj[2] = (x, y)
