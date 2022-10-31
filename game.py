@@ -21,6 +21,12 @@ COLORS = [RED, BLUE, YELLOW, GREEN, MAGENTA, CYAN]
 
 objects_list = []
 
+def set_speed(obj_speed):
+    angle = math.pi * 2 * random()
+    speed = (math.sin(angle) * obj_speed, math.cos(angle) * obj_speed)
+    print(speed)
+    return speed
+
 def create_circle():
     '''Add to objects list circle object with:
     [0]: type = 'circle'
@@ -30,7 +36,7 @@ def create_circle():
     [4]: movespeed on coords (x, y)
     '''
     circle_obj = []
-    circle_move_speed = 3
+    circle_move_speed = 10
 
     circle_obj.append('circle')
     '''[0]'''
@@ -44,9 +50,7 @@ def create_circle():
     r = randint(30, 50)
     circle_obj.append(r)
     '''[3]'''
-    x_speed = circle_move_speed * randint(-5, 5)
-    y_speed = circle_move_speed * randint(-5, 5)
-    circle_obj.append((x_speed, y_speed))
+    circle_obj.append(set_speed(circle_move_speed))
     '''[4]'''
     objects_list.append(circle_obj)
 
