@@ -2,6 +2,7 @@ import pygame
 import math
 from pygame.draw import *
 from random import *
+
 pygame.init()
 
 FPS = 30
@@ -23,21 +24,22 @@ COLORS = [RED, BLUE, YELLOW, GREEN, MAGENTA, CYAN]
 circle_move_speed = 30
 objects_list = []
 
+
 def set_speed(obj_speed):
     angle = math.pi * 2 * random()
     speed = (math.sin(angle) * obj_speed, math.cos(angle) * obj_speed)
     return speed
 
+
 def create_circle():
-    '''Add to objects list circle object with:
+    """Add to objects list circle object with:
     [0]: type = 'circle'
     [1]: Color
     [2]: start coordinates (x, y)
     [3]: radius if circle
     [4]: movespeed on coords (x, y)
-    '''
+    """
     circle_obj = []
-
 
     circle_obj.append('circle')
     '''[0]'''
@@ -55,7 +57,10 @@ def create_circle():
     '''[4]'''
     objects_list.append(circle_obj)
 
+
 create_circle()
+create_circle()
+
 
 def move_obj():
     for obj in objects_list:
@@ -74,7 +79,6 @@ def move_obj():
             get_speed = set_speed(circle_move_speed)
             if get_speed[1] < 0:
                 get_speed = get_speed[0], get_speed[1] * -1
-            print(get_speed)
             obj[4] = get_speed
         if obj[2][1] + obj[3] > screen_resolution[1]:
             get_speed = set_speed(circle_move_speed)
@@ -86,10 +90,12 @@ def move_obj():
         y = obj[2][1] + obj[4][1]
         obj[2] = (x, y)
 
+
 def draw_objects():
     for obj in objects_list:
         if obj[0] == 'circle':
             circle(screen, obj[1], obj[2], obj[3])
+
 
 pygame.display.update()
 clock = pygame.time.Clock()
@@ -113,7 +119,6 @@ while not finished:
                     create_circle()
                     objects_list.remove(obj)
                     play_score += 100
-
 
     draw_objects()
     pygame.display.update()
