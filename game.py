@@ -22,6 +22,7 @@ COLORS = [RED, BLUE, YELLOW, GREEN, MAGENTA, CYAN]
 '''make colors list'''
 
 circle_move_speed = 30
+romb_move_speed = 40
 objects_list = []
 
 
@@ -57,9 +58,35 @@ def create_circle():
     '''[4]'''
     objects_list.append(circle_obj)
 
+def create_romb():
+    """Add to objects list circle object with:
+        [0]: type = 'romb'
+        [1]: Color
+        [2]: start coordinates (x, y)
+        [3]: romb radius
+        [4]: movespeed on coords (x, y)
+        """
+    romb_obj = []
+
+    romb_obj.append('romb')
+    '''[0]'''
+    color = COLORS[randint(0, len(COLORS)) - 1]
+    romb_obj.append((color))
+    '''[1]'''
+    x = randint(100, 700)
+    y = randint(100, 500)
+    romb_obj.append((x, y))
+    '''[2]'''
+    r = randint(30, 50)
+    romb_obj.append(r)
+    '''[3]'''
+    romb_obj.append(set_speed(romb_move_speed))
+    '''[4]'''
+    objects_list.append(romb_obj)
 
 create_circle()
 create_circle()
+create_romb()
 
 
 def move_obj():
@@ -95,6 +122,12 @@ def draw_objects():
     for obj in objects_list:
         if obj[0] == 'circle':
             circle(screen, obj[1], obj[2], obj[3])
+        if obj[0] == 'romb':
+            dot1 = [obj[2][0] + obj[3], obj[2][1]]
+            dot2 = [obj[2][0], obj[2][1] + obj[3]]
+            dot3 = [obj[2][0] - obj[3], obj[2][1]]
+            dot4 = [obj[2][0], obj[2][1] - obj[3]]
+            polygon(screen, obj[1], [dot1, dot2, dot3, dot4])
 
 
 pygame.display.update()
