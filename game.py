@@ -144,14 +144,21 @@ while not finished:
             finished = True
         elif event.type == pygame.MOUSEBUTTONDOWN:
             for obj in objects_list:
-                gotcha = False
                 dis_to_obj_x = obj[2][0] - event.pos[0]
                 dis_to_obj_y = obj[2][1] - event.pos[1]
-                dis_to_obj = dis_to_obj_x ** 2 + dis_to_obj_y ** 2
-                if dis_to_obj < obj[3] ** 2:
-                    create_circle()
-                    objects_list.remove(obj)
-                    play_score += 100
+                if obj[0] == 'circle':
+                    dis_to_obj = dis_to_obj_x ** 2 + dis_to_obj_y ** 2
+                    if dis_to_obj < obj[3] ** 2:
+                        create_circle()
+                        objects_list.remove(obj)
+                        play_score += 100
+                elif obj[0] == 'romb':
+                    dis_to_obj = abs(dis_to_obj_x) + abs(dis_to_obj_y)
+                    if dis_to_obj < obj[3]:
+                        create_romb()
+                        objects_list.remove(obj)
+                        play_score += 139
+
 
     draw_objects()
     pygame.display.update()
