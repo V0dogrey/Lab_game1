@@ -76,8 +76,8 @@ while not finished:
         if event.type == pygame.QUIT:
             finished = True
 
-        key = pygame.key.get_pressed()
-        move = key[pygame.K_d] - key[pygame.K_a]
+    key = pygame.key.get_pressed()
+    move = key[pygame.K_d] - key[pygame.K_a]
 
     player.move(move)
     player.draw()
