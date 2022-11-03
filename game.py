@@ -17,10 +17,24 @@ BLACK = (0, 0, 0)
 COLORS = [RED, BLUE, YELLOW, GREEN, MAGENTA, CYAN]
 '''make colors list'''
 
-objects_list = []
+class Player:
+     def __init__(self):
+         pass
+     def move(self):
+         pass
+     def fire(self):
+         pass
 
-def draw_objects(objl):
-    return
+class Bullet:
+    pass
+
+class Level:
+    def __init__(self):
+        objects_list = []
+        player = Player
+    def draw_objects(self):
+        pass
+
 
 pygame.display.update()
 clock = pygame.time.Clock()
@@ -34,7 +48,6 @@ while not finished:
         if event.type == pygame.QUIT:
             finished = True
 
-    draw_objects(objects_list)
     pygame.display.update()
     screen.fill(BLACK)
 
