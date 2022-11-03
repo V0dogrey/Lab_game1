@@ -21,21 +21,23 @@ COLORS = [RED, BLUE, YELLOW, GREEN, MAGENTA, CYAN]
 
 class Player:
     start_position = (screen_size[0] / 2, screen_size[1] - 150)
-    sheep_shape = [[25, 15], [0, - 25], [-25, 15], [0, 0]]
+    ship_shape = [[25, 15], [0, - 25], [-25, 15], [0, 0]]
+    start_speed = 30
 
     def __init__(self):
         self.pos = self.start_position
+        self.speed = self.start_speed
 
     def draw(self):
         dots = []
-        for a in self.sheep_shape:
+        for a in self.ship_shape:
             x_pos = a[0] + self.pos[0]
             y_pos = a[1] + self.pos[1]
             dots.append([x_pos, y_pos])
         pygame.draw.polygon(screen, GRAY, dots)
 
-    def move(self):
-        pass
+    def move(self, move):
+        self.pos = (self.pos[0] + move * self.speed, self.pos[1])
 
     def fire(self):
         pass
@@ -62,10 +64,16 @@ player = Player()
 while not finished:
     '''main program work'''
     clock.tick(FPS)
+    move = 0
     for event in pygame.event.get():
         '''proc input'''
         if event.type == pygame.QUIT:
             finished = True
+
+        key = pygame.key.get_pressed()
+        move = key[pygame.K_d] - key[pygame.K_a]
+
+    player.move(move)
     player.draw()
     pygame.display.update()
     screen.fill(BLACK)
