@@ -55,12 +55,22 @@ class Stars:
     amount = 30
     move_speed = 24
     def __init__(self):
-        self.stars_list = []
-        for a in range(self.amount):
-            x = random.randint(0, screen_size[0])
-            y = random.randint(0, screen_size[1])
-            self.stars_list.append((x, y))
+        self.star_layer = []
+        for layer in range(3):
+            self.stars_list = []
+            for a in range(self.amount):
+                x = random.randint(0, screen_size[0])
+                y = random.randint(0, screen_size[1])
+                self.stars_list.append((x, y))
+            self.star_layer.append(self.stars_list)
     def move(self):
+        pass
+        '''
+        for layer in self.star_layer:
+            new_
+
+
+
         new_cord = []
         for star_cord in self.stars_list:
             x = star_cord[0]
@@ -68,11 +78,12 @@ class Stars:
             if y > screen_size[1]:
                 y -= screen_size[1]
             new_cord.append((x, y))
-        self.stars_list = new_cord
+        self.stars_list = new_cord'''
 
     def draw(self):
-        for star_cord in self.stars_list:
-            pygame.draw.circle(screen, (255, 255, 255), star_cord, 1, 1)
+        for layer in self.star_layer:
+            for star_cord in layer:
+                pygame.draw.circle(screen, (255, 255, 255), star_cord, 1, 1)
 
 class Level:
     def __init__(self):
