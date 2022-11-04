@@ -53,6 +53,7 @@ class Bullet:
 
 class Stars:
     amount = 30
+    move_speed = 24
     def __init__(self):
         self.stars_list = []
         for a in range(self.amount):
@@ -60,7 +61,14 @@ class Stars:
             y = random.randint(0, screen_size[1])
             self.stars_list.append((x, y))
     def move(self):
-        pass
+        new_cord = []
+        for star_cord in self.stars_list:
+            x = star_cord[0]
+            y = star_cord[1] + self.move_speed
+            if y > screen_size[1]:
+                y -= screen_size[1]
+            new_cord.append((x, y))
+        self.stars_list = new_cord
 
     def draw(self):
         for star_cord in self.stars_list:
@@ -95,6 +103,7 @@ while not finished:
     key = pygame.key.get_pressed()
     move = key[pygame.K_d] - key[pygame.K_a]
 
+    background.move()
     background.draw()
     player.move(move)
     player.draw()
