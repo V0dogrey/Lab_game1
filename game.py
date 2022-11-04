@@ -51,6 +51,21 @@ class Player:
 class Bullet:
     pass
 
+class Stars:
+    amount = 30
+    def __init__(self):
+        self.stars_list = []
+        for a in range(self.amount):
+            x = random.randint(0, screen_size[0])
+            y = random.randint(0, screen_size[1])
+            self.stars_list.append((x, y))
+    def move(self):
+        pass
+
+    def draw(self):
+        for star_cord in self.stars_list:
+            pygame.draw.circle(screen, (255, 255, 255), star_cord, 1, 1)
+
 class Level:
     def __init__(self):
         objects_list = []
@@ -66,6 +81,7 @@ clock = pygame.time.Clock()
 finished = False
 
 player = Player()
+background = Stars()
 
 while not finished:
     '''main program work'''
@@ -79,6 +95,7 @@ while not finished:
     key = pygame.key.get_pressed()
     move = key[pygame.K_d] - key[pygame.K_a]
 
+    background.draw()
     player.move(move)
     player.draw()
     pygame.display.update()
