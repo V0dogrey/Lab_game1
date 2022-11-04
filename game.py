@@ -53,7 +53,7 @@ class Bullet:
 
 class Stars:
     amount = 30
-    move_speed = 24
+    move_speed = 4
     def __init__(self):
         self.star_layer = []
         for layer in range(3):
@@ -64,21 +64,19 @@ class Stars:
                 self.stars_list.append((x, y))
             self.star_layer.append(self.stars_list)
     def move(self):
-        pass
-        '''
+        new_star_layer = []
+        counter = 0
         for layer in self.star_layer:
-            new_
-
-
-
-        new_cord = []
-        for star_cord in self.stars_list:
-            x = star_cord[0]
-            y = star_cord[1] + self.move_speed
-            if y > screen_size[1]:
-                y -= screen_size[1]
-            new_cord.append((x, y))
-        self.stars_list = new_cord'''
+            counter += 1
+            new_cord = []
+            for cord in layer:
+                x = cord[0]
+                y = cord[1] + self.move_speed * 2 ** counter
+                if y > screen_size[1]:
+                    y -= screen_size[1]
+                new_cord.append((x, y))
+            new_star_layer.append(new_cord)
+        self.star_layer = new_star_layer
 
     def draw(self):
         for layer in self.star_layer:
